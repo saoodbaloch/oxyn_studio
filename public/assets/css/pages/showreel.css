@@ -1,0 +1,123 @@
+/* OXYN SHOWREEL — isolated so hero styles cannot break it. */
+.showreel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    padding: 175px var(--page-gutter) 150px;
+    background: var(--color-page);
+}
+
+.showreel__marquee {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    overflow: hidden;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+.showreel__marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    will-change: transform;
+    animation: showreel-marquee 24s linear infinite;
+
+    color: #DFDFDF;
+    font-family: var(--font-display);
+    font-size: clamp(118px, 8.85vw, 170px);
+    font-weight: 452;
+    line-height: 1;
+    letter-spacing: .07em;
+    white-space: nowrap;
+}
+
+.showreel__marquee-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: .30em;
+    padding-right: .30em;
+}
+
+.showreel__dot {
+    display: inline-block;
+    transform: translateY(-.04em);
+}
+
+@keyframes showreel-marquee {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.showreel__media {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 1369px);
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: 45px;
+    background: #0b0b0b;
+    box-shadow: 0 28px 52px rgba(0,0,0,.10);
+    transform: translateZ(0);
+}
+
+.showreel__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1369 / 784;
+    object-fit: cover;
+    background: #0b0b0b;
+}
+
+@media (max-width: 1100px) {
+    .showreel {
+        padding-top: 130px;
+        padding-bottom: 125px;
+    }
+
+    .showreel__media {
+        border-radius: 34px;
+    }
+
+    .showreel__marquee-track {
+        font-size: clamp(90px, 12vw, 132px);
+    }
+}
+
+@media (max-width: 700px) {
+    .showreel {
+        padding: 92px 18px 96px;
+    }
+
+    .showreel__media {
+        width: 100%;
+        border-radius: 24px;
+    }
+
+    .showreel__video {
+        aspect-ratio: 16 / 10;
+    }
+
+    .showreel__marquee-track {
+        font-size: clamp(68px, 22vw, 104px);
+        letter-spacing: .035em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .showreel__marquee-track {
+        animation: none;
+        transform: translate3d(0, 0, 0);
+    }
+}

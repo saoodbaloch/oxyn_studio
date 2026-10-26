@@ -1,0 +1,977 @@
+/* =========================================================
+   OXYN — SERVICES STORY V20
+   Native reversible scroll-scrub + isolated sticky viewport.
+   No GSAP pinning. No section bleed. 01↔05 works both ways.
+   ========================================================= */
+
+.services-story {
+    position: relative;
+    height: 500vh;
+    min-height: 3600px;
+    background: var(--color-page);
+    isolation: isolate;
+}
+
+.services-story__viewport {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    background: var(--color-page);
+    isolation: isolate;
+}
+
+/* ---------- centered SERVICES badge ---------- */
+
+.services-story__badge {
+    position: absolute;
+    z-index: 30;
+    top: clamp(38px, 5.8vh, 62px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: max-content;
+    padding: 8px 18px;
+
+    border: 1px solid rgba(0,0,0,.045);
+    border-radius: 999px;
+    background: rgba(255,255,255,.93);
+    box-shadow: 0 4px 16px rgba(0,0,0,.05);
+
+    color: #4A4A4A;
+    font-family: var(--font-cta);
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: .025em;
+}
+
+.services-story__badge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #666;
+}
+
+/* =========================================================
+   LEFT CIRCULAR INDEX
+   ========================================================= */
+
+.services-wheel {
+    --wheel-size: clamp(790px, 62.86vw, 1207px);
+
+    position: absolute;
+    z-index: 2;
+    left: calc(var(--wheel-size) * -0.72);
+    top: 50%;
+
+    width: var(--wheel-size);
+    height: var(--wheel-size);
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.services-wheel__ring {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(110,110,110,.24);
+    border-radius: 50%;
+}
+
+.services-wheel__active-dot {
+    position: absolute;
+    z-index: 7;
+    left: 50%;
+    top: 50%;
+
+    width: 10px;
+    height: 10px;
+
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #ff1f1f;
+    box-shadow: 0 0 0 5px rgba(255,31,31,.10);
+    transition: transform 260ms cubic-bezier(.22,1,.36,1);
+    will-change: transform;
+}
+
+.services-wheel__number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 5;
+
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 54px;
+
+    color: rgba(59,59,59,.26);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 1.85vw, 35px);
+    font-weight: 400;
+    line-height: 1;
+
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity, color;
+
+    margin-left: 58px;
+}
+
+.services-wheel__number.is-current {
+    color: #3B3B3B;
+}
+
+/* =========================================================
+   COPY — vertically centered exactly inside service viewport
+   ========================================================= */
+
+.services-story__content {
+    position: absolute;
+    z-index: 10;
+
+    left: clamp(500px, 32vw, 610px);
+    top: 50%;
+
+    width: min(34vw, 600px);
+    height: 360px;
+
+    transform: translateY(-50%);
+}
+
+.service-panel {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translate3d(0, 180px, 0) scale(.985);
+    filter: blur(14px);
+
+    will-change: transform, opacity, filter;
+}
+
+.service-panel.is-active {
+    visibility: visible;
+}
+
+.service-panel__eyebrow {
+    display: none;
+}
+
+.service-panel__title {
+    margin: 0;
+    max-width: 650px;
+
+    color: #3B3B3B;
+    font-family: "Geist Mono", var(--font-mono);
+    font-size: clamp(46px, 4.25vw, 82px);
+    font-weight: 400;
+    line-height: 1.024;
+    letter-spacing: .02em;
+}
+
+.service-panel__description {
+    margin: 22px 0 0;
+    max-width: 620px;
+
+    color: #3B3B3B;
+    font-family: var(--font-cta);
+    font-size: clamp(14px, .98vw, 18px);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.service-panel__tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.service-panel__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 28px;
+    padding: 6px 12px;
+
+    border: 1px solid rgba(59,59,59,.10);
+    border-radius: 999px;
+    background: rgba(255,255,255,.82);
+
+    color: #5E5E5E;
+    font-family: "Geist Mono", var(--font-mono);
+    font-size: 9.5px;
+    line-height: 1;
+    letter-spacing: .035em;
+    white-space: nowrap;
+}
+
+
+/* Soft top/bottom fade chamber: text appears to roll through the section,
+   rather than popping between slides. */
+.services-story__content {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 16%,
+        #000 84%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 16%,
+        #000 84%,
+        transparent 100%
+    );
+}
+
+/* =========================================================
+   RIGHT 3D OBJECTS
+   Visible object is trimmed from transparent source padding.
+   Fixed responsive bounds prevent it entering other sections.
+   ========================================================= */
+
+.services-story__visuals {
+    position: absolute;
+    z-index: 5;
+
+    right: clamp(10px, 1.4vw, 28px);
+    top: 50%;
+
+    width: clamp(245px, 19vw, 360px);
+    height: clamp(245px, 19vw, 360px);
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.service-visual {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+
+    display: grid;
+    place-items: center;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translate3d(56px, 0, 0) scale(.92);
+    filter: blur(10px);
+
+    will-change: transform, opacity, filter;
+    pointer-events: none;
+}
+
+.service-visual.is-active {
+    visibility: visible;
+}
+
+.service-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Decorative progress only */
+.services-story__progress {
+    position: absolute;
+    right: 24px;
+    bottom: 20px;
+    z-index: 20;
+
+    color: rgba(59,59,59,.28);
+    font-family: "Geist Mono", var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .04em;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1500px) and (min-width: 1101px) {
+    .services-story__content {
+        left: clamp(430px, 31vw, 520px);
+        width: 39vw;
+        top: 46%;
+    }
+
+    .services-story__visuals {
+        right: 12px;
+        width: clamp(235px, 18vw, 320px);
+        height: clamp(235px, 18vw, 320px);
+    }
+
+    .service-panel__title {
+        font-size: clamp(44px, 4vw, 66px);
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 801px) {
+    .services-story {
+        height: 470vh;
+    }
+
+    .services-wheel {
+        --wheel-size: 700px;
+        left: -500px;
+    }
+
+    .services-wheel__number {
+        margin-left: 42px;
+    }
+
+    .services-story__content {
+        left: 29vw;
+        width: 45vw;
+        top: 46%;
+    }
+
+    .services-story__visuals {
+        right: 8px;
+        width: 250px;
+        height: 250px;
+    }
+
+    .service-panel__title {
+        font-size: clamp(38px, 5vw, 56px);
+    }
+
+    .service-panel__description {
+        font-size: 14px;
+    }
+}
+
+/* Mobile: normal content flow, no sticky hijacking */
+@media (max-width: 800px) {
+    .services-story {
+        height: auto;
+        min-height: 0;
+        padding: 72px 20px 20px;
+    }
+
+    .services-story__viewport {
+        position: relative;
+        top: auto;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .services-story__badge {
+        position: relative;
+        top: auto;
+        left: 50%;
+        margin-bottom: 46px;
+    }
+
+    .services-wheel,
+    .services-story__progress {
+        display: none;
+    }
+
+    .services-story__content {
+        position: static;
+        width: min(100%, 720px);
+        height: auto;
+        margin-inline: auto;
+        transform: none;
+    }
+
+    .service-panel {
+        position: relative;
+        inset: auto;
+
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+
+        padding-bottom: 46px;
+        margin-bottom: 50px;
+        border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+
+    .service-panel__eyebrow {
+        display: block;
+        margin: 0 0 12px;
+        color: rgba(59,59,59,.44);
+        font-family: var(--font-display);
+        font-size: 24px;
+    }
+
+    .service-panel__title {
+        font-size: clamp(36px, 10vw, 56px);
+    }
+
+    .service-panel__description {
+        font-size: 15px;
+    }
+
+    .services-story__visuals {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   V23 MOBILE / TABLET SERVICE STORY
+   ========================================================= */
+@media (max-width: 900px) {
+    .services-story {
+        min-height: 760px;
+        overflow: hidden;
+    }
+
+    .services-story__sticky {
+        min-height: 100svh;
+        overflow: hidden;
+    }
+
+    .services-wheel {
+        --wheel-size: 560px;
+        left: -430px;
+        top: 50%;
+    }
+
+    .services-wheel__number {
+        margin-left: 34px;
+        font-size: 24px;
+    }
+
+    .services-story__content {
+        left: 18px;
+        right: 18px;
+        top: 39%;
+        width: auto;
+        height: 300px;
+        transform: none;
+        z-index: 5;
+        padding-left: 92px;
+        padding-right: 96px;
+    }
+
+    .services-story__visuals {
+        right: 8px;
+        top: 53%;
+        width: 170px;
+        height: 170px;
+        transform: translateY(-50%);
+        z-index: 4;
+    }
+
+    .services-story__visual img {
+        object-position: right center;
+    }
+}
+
+@media (max-width: 640px) {
+    .services-story {
+        min-height: 700px;
+    }
+
+    .services-wheel {
+        --wheel-size: 500px;
+        left: -395px;
+    }
+
+    .services-wheel__number {
+        margin-left: 28px;
+        font-size: 21px;
+    }
+
+    .services-story__content {
+        left: 12px;
+        right: 12px;
+        top: 35%;
+        height: 285px;
+        padding-left: 74px;
+        padding-right: 18px;
+    }
+
+    .services-story__content h2,
+    .services-story__content h3 {
+        font-size: clamp(34px, 10vw, 52px);
+        line-height: .98;
+    }
+
+    .services-story__content p {
+        max-width: 78%;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .services-story__visuals {
+        top: 71%;
+        right: 4px;
+        width: 155px;
+        height: 155px;
+    }
+}
+
+
+/* =========================================================
+   V24 — RIGHT DECORATIVE IMAGE / CONTAINER EDGE FIX
+   Keeps the full decorative object inside the viewport and
+   removes the visible rectangular-container feel.
+   ========================================================= */
+.services-story,
+.services-story__sticky,
+.services-story__visuals,
+.services-story__visual {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.services-story__visuals {
+    overflow: visible !important;
+    right: clamp(18px, 2vw, 38px) !important;
+    width: clamp(220px, 18vw, 340px) !important;
+    height: clamp(220px, 18vw, 340px) !important;
+    max-width: calc(100vw - 24px) !important;
+}
+
+.services-story__visual {
+    overflow: visible !important;
+}
+
+.services-story__visual img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: right center !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    clip-path: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
+
+/* Prevent the decorative image from touching/crossing the viewport edge. */
+@media (max-width: 1280px) {
+    .services-story__visuals {
+        right: 12px !important;
+        width: clamp(200px, 17vw, 280px) !important;
+        height: clamp(200px, 17vw, 280px) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .services-story__visuals {
+        right: 10px !important;
+        top: 56% !important;
+        width: clamp(150px, 30vw, 190px) !important;
+        height: clamp(150px, 30vw, 190px) !important;
+        transform: translateY(-50%) !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .services-story__visuals {
+        right: 8px !important;
+        top: 73% !important;
+        width: clamp(126px, 34vw, 160px) !important;
+        height: clamp(126px, 34vw, 160px) !important;
+    }
+
+    .services-story__content {
+        padding-right: 118px !important;
+    }
+}
+
+
+/* =========================================================
+   V26 — REFERENCE SPACING / HEADER-SAFE SERVICE STORY
+   Goals:
+   • no SERVICES pill above the story
+   • active copy never enters the sticky glass navbar
+   • tighter rolling copy spacing (no huge vertical jump)
+   • wheel/arc stays visibly inside the left viewport
+   • larger reference-like numbering
+   • more gap between numbering and copy
+   • right object stays fully inside the screen
+   ========================================================= */
+
+@media (min-width: 801px) {
+    .services-story__viewport {
+        /* Glass navbar is ~68px tall. Keep an intentional breathing gap. */
+        top: 84px !important;
+        height: calc(100svh - 84px) !important;
+        min-height: 650px !important;
+        overflow: hidden !important;
+    }
+
+    /* Wheel: move the arc slightly INSIDE the viewport. */
+    .services-wheel {
+        --wheel-size: clamp(790px, 62.86vw, 1207px);
+        left: calc(var(--wheel-size) * -0.695) !important;
+        top: 50% !important;
+    }
+
+    .services-wheel__number {
+        margin-left: 58px !important;
+        width: 70px !important;
+        height: 58px !important;
+        font-size: clamp(28px, 2.05vw, 42px) !important;
+    }
+
+    /* Copy: reference has a healthy gap after the numbering. */
+    .services-story__content {
+        left: clamp(620px, 35.25vw, 690px) !important;
+        top: 48.5% !important;
+        width: min(35vw, 630px) !important;
+        height: 330px !important;
+
+        overflow: hidden !important;
+
+        /* Fade the rolling text BEFORE it can reach the navbar. */
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0,0,0,.18) 8%,
+            #000 21%,
+            #000 79%,
+            rgba(0,0,0,.18) 92%,
+            transparent 100%
+        ) !important;
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0,0,0,.18) 8%,
+            #000 21%,
+            #000 79%,
+            rgba(0,0,0,.18) 92%,
+            transparent 100%
+        ) !important;
+    }
+
+    .service-panel__title {
+        font-size: clamp(44px, 4.0vw, 76px) !important;
+        line-height: 1.015 !important;
+    }
+
+    .service-panel__description {
+        margin-top: 16px !important;
+    }
+
+    .service-panel__tags {
+        margin-top: 16px !important;
+    }
+
+    /* Right image: centered vertically and safely INSIDE screen edge. */
+    .services-story__visuals {
+        right: clamp(34px, 2.8vw, 58px) !important;
+        top: 50% !important;
+        width: clamp(270px, 18.5vw, 355px) !important;
+        height: clamp(270px, 18.5vw, 355px) !important;
+        max-width: calc(100vw - 48px) !important;
+        transform: translateY(-50%) !important;
+        overflow: visible !important;
+    }
+
+    .service-visual img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: right center !important;
+    }
+}
+
+/* Mid desktop / laptop */
+@media (max-width: 1500px) and (min-width: 1101px) {
+    .services-story__content {
+        left: clamp(500px, 35vw, 565px) !important;
+        width: 40vw !important;
+        top: 48.5% !important;
+    }
+
+    .services-story__visuals {
+        right: 24px !important;
+        width: clamp(235px, 18vw, 300px) !important;
+        height: clamp(235px, 18vw, 300px) !important;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+    .services-story__viewport {
+        top: 76px !important;
+        height: calc(100svh - 76px) !important;
+    }
+
+    .services-wheel {
+        --wheel-size: 700px;
+        left: -475px !important;
+    }
+
+    .services-wheel__number {
+        margin-left: 44px !important;
+        font-size: 28px !important;
+    }
+
+    .services-story__content {
+        left: 31vw !important;
+        top: 48% !important;
+        width: 44vw !important;
+        height: 310px !important;
+    }
+
+    .services-story__visuals {
+        right: 18px !important;
+        width: 225px !important;
+        height: 225px !important;
+    }
+}
+
+/* Tablet/mobile remains normal responsive content; no sticky overlap. */
+@media (max-width: 900px) {
+    .services-story__badge {
+        display: none !important;
+    }
+}
+
+/* =========================================================
+   V27 — CORRECT REFERENCE TIMING
+   • copy physically travels upward behind the sticky navbar
+   • outgoing copy has NO opacity fade-out
+   • next copy rises from below with only a soft entry blur
+   • service numbers have wider spacing
+   • red active dot snaps directly 01→02→03→04→05
+   ========================================================= */
+@media (min-width: 901px) {
+    .services-story {
+        /* Deliberately long runway: each service has time to travel. */
+        height: 560vh !important;
+        min-height: 4100px !important;
+    }
+
+    .services-story__viewport {
+        /* Sticky viewport begins immediately below the glass navbar. */
+        top: 82px !important;
+        height: calc(100svh - 82px) !important;
+        min-height: 620px !important;
+        overflow: hidden !important;
+        background: var(--color-page) !important;
+    }
+
+    .services-story__content {
+        /* Full-height motion chamber; JS moves panels through this space. */
+        left: clamp(610px, 35vw, 690px) !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: min(35vw, 630px) !important;
+        height: auto !important;
+        transform: none !important;
+        overflow: visible !important;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        pointer-events: none;
+    }
+
+    .service-panel {
+        inset: auto !important;
+        left: 0 !important;
+        top: 50% !important;
+        width: 100% !important;
+        min-height: 320px;
+        margin-top: -160px;
+        justify-content: center;
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: none;
+        will-change: transform, opacity, filter;
+    }
+
+    /* Give 01/02/03/04/05 the generous reference spacing. */
+    .services-wheel {
+        --wheel-size: clamp(820px, 64vw, 1220px);
+        left: calc(var(--wheel-size) * -0.695) !important;
+        top: 50% !important;
+    }
+
+    .services-wheel__number {
+        margin-left: 62px !important;
+        width: 74px !important;
+        height: 62px !important;
+        font-size: clamp(29px, 2.15vw, 43px) !important;
+        transition: none !important;
+    }
+
+    .services-wheel__active-dot {
+        transition: none !important;
+    }
+
+    /* Keep the decorative image calm and centered while copy rolls. */
+    .services-story__visuals {
+        right: clamp(24px, 2.1vw, 44px) !important;
+        top: 50% !important;
+        width: clamp(250px, 17.3vw, 330px) !important;
+        height: clamp(250px, 17.3vw, 330px) !important;
+        transform: translateY(-50%) !important;
+    }
+
+    .service-visual img {
+        object-position: center center !important;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 901px) {
+    .services-story__content {
+        left: 34vw !important;
+        width: 43vw !important;
+    }
+
+    .services-wheel {
+        --wheel-size: 760px;
+        left: -530px !important;
+    }
+
+    .services-wheel__number {
+        margin-left: 50px !important;
+        font-size: 29px !important;
+    }
+
+    .services-story__visuals {
+        right: 14px !important;
+        width: 225px !important;
+        height: 225px !important;
+    }
+}
+
+/* =========================================================
+   V29 — FINAL DIAL + EDGE ART POLISH
+   1) Red dot is mathematically locked to the visible circle stroke.
+   2) Decorative service art is larger and intentionally tucked into
+      the right viewport edge without dropping below the copy center.
+   3) Responsive edge treatment for laptop/tablet/mobile.
+   ========================================================= */
+@media (min-width: 901px) {
+    .services-story__visuals {
+        /* Larger than V28, but vertically locked to the copy center. */
+        right: clamp(-96px, -4.8vw, -58px) !important;
+        top: 50% !important;
+        width: clamp(340px, 23.5vw, 450px) !important;
+        height: clamp(340px, 23.5vw, 450px) !important;
+        transform: translateY(-50%) !important;
+        overflow: visible !important;
+    }
+
+    .service-visual,
+    .service-visual img {
+        overflow: visible !important;
+    }
+
+    .service-visual img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 901px) {
+    .services-story__visuals {
+        right: -66px !important;
+        width: clamp(285px, 28vw, 350px) !important;
+        height: clamp(285px, 28vw, 350px) !important;
+    }
+}
+
+/* Mobile/tablet: keep a restrained decorative object at the right edge.
+   The services themselves remain in normal document flow. */
+@media (max-width: 900px) {
+    .services-story {
+        overflow: hidden !important;
+    }
+
+    .services-story__visuals {
+        display: block !important;
+        position: absolute !important;
+        right: clamp(-82px, -10vw, -42px) !important;
+        top: 185px !important;
+        width: clamp(180px, 38vw, 270px) !important;
+        height: clamp(180px, 38vw, 270px) !important;
+        transform: none !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+    }
+
+    .service-visual {
+        display: grid !important;
+        place-items: center !important;
+    }
+
+    .service-visual img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: center !important;
+    }
+
+    .services-story__content {
+        position: relative !important;
+        z-index: 3 !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .services-story__visuals {
+        right: -70px !important;
+        top: 155px !important;
+        width: clamp(160px, 47vw, 215px) !important;
+        height: clamp(160px, 47vw, 215px) !important;
+    }
+}
+
+/* V31 — Figma service art placement.
+   Desktop/laptop: keep the object large and intentionally crop ~30%
+   beyond the RIGHT viewport edge. Responsive clamps keep that ratio
+   visually stable across common PC/laptop widths. */
+@media (min-width:1251px){
+    .services-story__visuals{
+        right:clamp(-135px,-7.03vw,-102px)!important;
+        top:50%!important;
+        width:clamp(340px,23.5vw,450px)!important;
+        height:clamp(340px,23.5vw,450px)!important;
+        transform:translateY(-50%)!important;
+        overflow:visible!important;
+    }
+}
+@media (max-width:1250px) and (min-width:901px){
+    .services-story__visuals{
+        right:clamp(-105px,-8.4vw,-86px)!important;
+        width:clamp(285px,28vw,350px)!important;
+        height:clamp(285px,28vw,350px)!important;
+    }
+}
+
+/* Mobile artwork duplicate is intentionally hidden on desktop. */
+.service-panel__mobile-visual{display:none}

@@ -1,0 +1,76 @@
+/* OXYN mobile polish — loaded last. Desktop (>= 761px) is untouched. */
+@media (max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  :root{--mobile-pad:18px}
+
+  /* Header: one clean row. CTA moves out of the way on mobile. */
+  .site-header{padding-top:0!important;min-height:64px;background:rgba(247,247,245,.82)!important;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+  .site-header__inner,.site-header.is-scrolled .site-header__inner{width:calc(100% - 28px)!important;height:64px!important;padding:0!important;grid-template-columns:auto 1fr auto!important}
+  .site-logo img{transform:none!important;width:96px!important;height:auto!important}
+  .header-cta{display:none!important}
+  .nav-toggle{display:block!important;grid-column:3!important;justify-self:end!important}
+  .primary-nav{left:14px!important;right:14px!important;top:calc(100% + 6px)!important;padding:12px!important;border-radius:16px!important;background:rgba(255,255,255,.94)!important;box-shadow:0 16px 40px rgba(0,0,0,.12)!important;backdrop-filter:blur(20px)!important;-webkit-backdrop-filter:blur(20px)!important}
+  .primary-nav__list{gap:2px!important}.primary-nav__link{min-height:48px!important;padding:0 12px!important;font-size:16px!important}
+
+  /* Hero: visitor-facing mobile experience; desktop editor stays available. */
+  .hero__inner{padding:48px var(--mobile-pad) 0!important}
+  .hero__title{font-size:clamp(37px,10.5vw,52px)!important;line-height:1.02!important;letter-spacing:-.055em!important}
+  .hero__title-highlight{padding-inline:7px!important}
+  .editor-toolbar{display:none!important}
+  .hero-art{width:calc(100% + 48px)!important;max-width:none!important;margin:28px -24px 0!important}
+  .hero__meta{width:100%!important;margin-top:18px!important;row-gap:16px!important}
+  .hero__customers{font-size:13px!important;gap:8px!important}.hero__avatars img{width:26px!important;height:26px!important}
+  .hero__description{font-size:15px!important;line-height:1.35!important;max-width:320px!important}.hero__description br{display:none!important}
+  .hero__email{font-size:14px!important;overflow-wrap:anywhere!important}
+
+  /* Showreel: remove desktop breathing room and keep a cinematic ratio. */
+  .showreel{padding-top:70px!important;padding-bottom:76px!important}
+  .showreel__marquee{display:none!important}
+  .showreel__media{width:calc(100% - 30px)!important;height:auto!important;aspect-ratio:16/9!important;margin-inline:auto!important;border-radius:20px!important;overflow:hidden!important}
+  .showreel__video{width:100%!important;height:100%!important;object-fit:cover!important}
+
+  /* Featured work: comfortable touch layout. */
+  .featured-work{padding-left:0!important;padding-right:0!important;overflow:hidden!important}
+  .featured-work__eyebrow{margin-bottom:24px!important}
+  .featured-work__filters{padding-inline:16px!important;font-size:12px!important}
+  .featured-work__carousel{margin-top:26px!important}
+  .featured-work__carousel--long .featured-work__slide.is-center{width:calc(100vw - 36px)!important;border-radius:22px!important}
+
+  /* Services: normal document flow, each service owns its artwork. */
+  .services-story{height:auto!important;min-height:0!important;padding:78px var(--mobile-pad) 42px!important;overflow:visible!important}
+  .services-story__viewport{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;overflow:visible!important}
+  .services-wheel,.services-story__progress,.services-story__visuals{display:none!important}
+  .services-story__content{position:static!important;width:100%!important;height:auto!important;margin:0!important;transform:none!important}
+  .service-panel{position:relative!important;inset:auto!important;display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;filter:none!important;width:100%!important;min-height:0!important;margin:0 0 64px!important;padding:0 0 54px!important;border-bottom:1px solid rgba(0,0,0,.09)!important}
+  .service-panel:last-child{margin-bottom:0!important}
+  .service-panel__eyebrow{display:block!important;margin:0 0 10px!important;font-size:14px!important;color:rgba(0,0,0,.34)!important}
+  .service-panel__title{font-size:clamp(38px,12vw,56px)!important;line-height:.98!important;max-width:90%!important}
+  .service-panel__description{max-width:330px!important;font-size:15px!important;line-height:1.5!important;margin-top:18px!important}
+  .service-panel__tags{gap:7px!important;margin-top:20px!important;flex-wrap:wrap!important}.service-panel__tag{font-size:10px!important;padding:8px 11px!important}
+  .service-panel__mobile-visual{display:block!important;width:min(78vw,300px)!important;height:220px!important;margin:28px auto 0!important}
+  .service-panel__mobile-visual img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+
+  /* Pricing: no clipped feature list. */
+  .pricing{padding:78px var(--mobile-pad) 90px!important}.pricing__title{font-size:clamp(29px,8.4vw,38px)!important;line-height:1.08!important}
+  .pricing-card{overflow:visible!important;border-radius:24px!important}.pricing-card__main{padding:30px 20px 24px!important}.pricing-card__features-wrap{padding:8px 20px 30px!important}.pricing-card__price{font-size:clamp(48px,14vw,66px)!important}
+
+  /* Testimonials: one hero card on small screens; desktop stack remains untouched. */
+  .testimonials{padding:76px var(--mobile-pad) 88px!important}.testimonials__title{font-size:clamp(29px,8.6vw,38px)!important;line-height:1.05!important}
+  .testimonials__cards{min-height:360px!important;margin-top:34px!important;overflow:hidden!important;align-items:center!important}
+  .testimonial-card--1,.testimonial-card--3{display:none!important}.testimonial-card--2{width:min(72vw,270px)!important;margin:0!important;transform:none!important}
+  .testimonials__stats{margin-top:24px!important}
+
+  /* Contact: compact, readable and thumb-friendly. */
+  .contact-section{padding:76px var(--mobile-pad) 82px!important}.contact-section__title{font-size:clamp(31px,9vw,40px)!important;line-height:1.02!important;margin-bottom:34px!important}.contact-section__title br{display:none!important}
+  .contact-card{padding:22px 18px!important;gap:30px!important;border-radius:22px!important}.contact-form__row{gap:28px!important}.contact-field__label{font-size:16px!important}.contact-field input,.contact-field select,.contact-field textarea{font-size:15px!important}.contact-field textarea{height:130px!important}.contact-form__actions p br{display:none!important}.contact-form__email{margin-top:32px!important;font-size:13px!important}
+  .contact-card__visual{height:auto!important;aspect-ratio:4/5!important;border-radius:18px!important}
+  .contact-form__status{margin:14px 0 0;font:500 13px/1.4 Inter,sans-serif}.contact-form__status.is-success{color:#176b35}.contact-form__status.is-error{color:#a32222}
+
+  /* Insights/blog and final CTA. */
+  .insights-section{padding:78px var(--mobile-pad) 88px!important}.insights-section__title{font-size:clamp(30px,9vw,40px)!important;margin-bottom:36px!important}.insights-grid{gap:24px!important}.insight-card{border-radius:22px!important}.insight-card__body{padding:22px!important}.insight-card__image{aspect-ratio:16/10!important}
+  .closing-cta{width:calc(100% - 36px)!important;height:500px!important;margin-bottom:36px!important;border-radius:24px!important}.closing-cta__main{left:24px!important;right:24px!important;top:22%!important}.closing-cta__main h2{font-size:clamp(31px,9vw,39px)!important;line-height:1.08!important}.closing-cta__logo{right:22px!important;top:22px!important}.closing-cta__bottom{left:24px!important;right:24px!important;bottom:24px!important}
+}
+
+@media (max-width:390px){
+  .hero__title{font-size:36px!important}.service-panel__title{font-size:40px!important}.closing-cta__main h2{font-size:30px!important}
+}

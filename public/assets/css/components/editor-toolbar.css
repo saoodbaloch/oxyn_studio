@@ -1,0 +1,163 @@
+.editor-toolbar {
+    position: relative;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 12px auto 0;
+    padding: 7px 10px;
+    gap: 4px;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-family: var(--font-ui);
+}
+
+.editor-toolbar__heading-wrap {
+    display: inline-flex;
+    align-items: center;
+}
+
+.editor-toolbar__heading-select {
+    height: 32px;
+    min-width: 104px;
+    padding: 0 28px 0 8px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.editor-toolbar__heading-select:hover,
+.editor-toolbar__heading-select:focus-visible {
+    background: #F0F0F0;
+    outline: none;
+}
+
+.editor-toolbar__divider {
+    width: 1px;
+    height: 22px;
+    margin-inline: 4px;
+    background: rgba(0, 0, 0, .10);
+}
+
+.editor-toolbar__button,
+.editor-toolbar__color-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #9B9B9B;
+    cursor: pointer;
+    line-height: 1;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.editor-toolbar__button:hover,
+.editor-toolbar__button:focus-visible,
+.editor-toolbar__button.is-active,
+.editor-toolbar__color-toggle:hover,
+.editor-toolbar__color-toggle:focus-visible,
+.editor-toolbar__color-toggle.is-open {
+    background: #F0F0F0;
+    color: #111111;
+}
+
+.editor-toolbar__button:active,
+.editor-toolbar__color-toggle:active {
+    transform: translateY(1px);
+}
+
+.editor-toolbar__button:focus-visible,
+.editor-toolbar__color-toggle:focus-visible,
+.editor-toolbar__swatch:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
+}
+
+.editor-toolbar__bold { font-weight: 700; }
+.editor-toolbar__italic { font-family: Georgia, serif; font-size: 19px; font-style: italic; }
+.editor-toolbar__underline { text-decoration: underline; text-underline-offset: 2px; }
+
+.editor-toolbar__color { position: relative; }
+
+.editor-toolbar__color-toggle {
+    grid-template-columns: auto auto;
+    column-gap: 3px;
+    width: 38px;
+    color: #111111;
+}
+
+.editor-toolbar__color-letter {
+    font-family: var(--font-ui);
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.editor-toolbar__chevron {
+    width: 5px;
+    height: 5px;
+    margin-top: -3px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+}
+
+.editor-toolbar__palette {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: -8px;
+    z-index: 20;
+    display: none;
+    grid-template-columns: repeat(4, 42px);
+    gap: 2px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .98);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.editor-toolbar__palette.is-open { display: grid; }
+
+.editor-toolbar__swatch {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--swatch-color);
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.editor-toolbar__swatch:hover,
+.editor-toolbar__swatch.is-active { background: #F0F0F0; }
+
+@media (max-width: 600px) {
+    .editor-toolbar {
+        transform: scale(.9);
+        transform-origin: top center;
+    }
+}

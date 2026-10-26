@@ -1,0 +1,307 @@
+.hero {
+    position: relative;
+    overflow-x: clip;
+    background: var(--color-page);
+}
+
+.hero__inner {
+    width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-max));
+    min-height: 0;
+    margin-inline: auto;
+    position: relative;
+    padding-top: 78px;
+}
+
+.hero__title {
+    position: relative;
+    z-index: 7;
+    margin: 0 auto;
+    width: max-content;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--hero-font-size);
+    font-weight: var(--hero-font-weight);
+    line-height: 1.04;
+    letter-spacing: var(--hero-letter-spacing);
+    text-align: center;
+}
+
+.hero__title-highlight {
+    display: inline-block;
+    margin-top: var(--space-2);
+    padding: 2px 14px 7px;
+    background: var(--color-hero-highlight);
+    border-radius: var(--radius-hero-highlight);
+}
+
+/* Static text: the toolbar formats this element, but the visitor cannot edit the words. */
+.hero__format-target {
+    display: inline-block;
+    color: #111111;
+    transition: color 140ms ease, font-size 140ms ease;
+}
+
+.hero__format-target.is-bold { font-weight: 700; }
+.hero__format-target.is-italic { font-style: italic; }
+.hero__format-target.is-underlined {
+    text-decoration: underline;
+    text-decoration-thickness: .065em;
+    text-underline-offset: .09em;
+}
+.hero__format-target[data-heading="1"] { font-size: 1em; }
+.hero__format-target[data-heading="2"] { font-size: .84em; }
+.hero__format-target[data-heading="3"] { font-size: .70em; }
+
+.hero-liquid-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-art {
+    --mx: 50%;
+    --my: 50%;
+    --ripple-x: 0px;
+    --ripple-y: 0px;
+    --ripple-rotate: 0deg;
+    --ripple-scale: 1.018;
+
+    position: relative;
+    z-index: 2;
+    width: min(calc(100vw - 40px), 1516px);
+    aspect-ratio: 1516 / 632;
+    margin: -16px auto 0;
+    user-select: none;
+    cursor: default;
+    isolation: isolate;
+}
+
+/* Soft atmospheric glow behind the transparent artwork. No rectangle image is used,
+   so there is no visible container edge. */
+.hero-art::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 10% 4% 4%;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 18% 45%, rgba(115, 92, 180, .085), transparent 32%),
+        radial-gradient(ellipse at 82% 45%, rgba(130, 92, 175, .08), transparent 32%);
+    filter: blur(28px);
+}
+
+.hero-art__base,
+.hero-art__lens-image,
+.hero-art__ripple-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.hero-art__base {
+    filter:
+        drop-shadow(0 15px 24px rgba(67, 48, 120, .10))
+        drop-shadow(0 4px 10px rgba(116, 74, 164, .055));
+}
+
+/* Main local water/refraction layer. */
+.hero-art__lens-image,
+.hero-art__ripple-image {
+    opacity: 0;
+    filter:
+        url(#hero-liquid-refraction)
+        saturate(1.19)
+        contrast(1.035)
+        brightness(1.025);
+    transform-origin: var(--mx) var(--my);
+    will-change: transform, opacity, mask-image, -webkit-mask-image;
+}
+
+.hero-art__lens-image {
+    transform:
+        translate(var(--ripple-x), var(--ripple-y))
+        rotate(var(--ripple-rotate))
+        scale(var(--ripple-scale));
+
+    -webkit-mask-image: radial-gradient(
+        ellipse 115px 82px at var(--mx) var(--my),
+        #000 0 34%,
+        rgba(0, 0, 0, .96) 46%,
+        rgba(0, 0, 0, .66) 62%,
+        rgba(0, 0, 0, .24) 76%,
+        transparent 90%
+    );
+    mask-image: radial-gradient(
+        ellipse 115px 82px at var(--mx) var(--my),
+        #000 0 34%,
+        rgba(0, 0, 0, .96) 46%,
+        rgba(0, 0, 0, .66) 62%,
+        rgba(0, 0, 0, .24) 76%,
+        transparent 90%
+    );
+}
+
+/* Second, softer wave lagging behind the pointer creates the jelly/water wobble. */
+.hero-art__ripple-image--2 {
+    transform:
+        translate(calc(var(--ripple-x) * -.45), calc(var(--ripple-y) * -.45))
+        rotate(calc(var(--ripple-rotate) * -.55))
+        scale(1.012);
+
+    filter:
+        url(#hero-liquid-refraction)
+        saturate(1.10)
+        blur(.35px);
+
+    -webkit-mask-image: radial-gradient(
+        ellipse 155px 108px at var(--mx) var(--my),
+        rgba(0,0,0,.72) 0 25%,
+        rgba(0,0,0,.42) 48%,
+        rgba(0,0,0,.14) 67%,
+        transparent 86%
+    );
+    mask-image: radial-gradient(
+        ellipse 155px 108px at var(--mx) var(--my),
+        rgba(0,0,0,.72) 0 25%,
+        rgba(0,0,0,.42) 48%,
+        rgba(0,0,0,.14) 67%,
+        transparent 86%
+    );
+}
+
+.hero-art.is-hovering .hero-art__lens-image { opacity: .94; }
+.hero-art.is-hovering .hero-art__ripple-image--2 { opacity: .42; }
+
+/* Figma Frame 12: 1514 × 54. Kept directly underneath the artwork. */
+.hero__meta {
+    position: relative;
+    z-index: 6;
+    width: min(100%, 1514px);
+    min-height: 54px;
+    margin: 12px auto 0;
+    display: grid;
+    grid-template-columns: auto minmax(420px, 1fr) auto;
+    align-items: center;
+    column-gap: clamp(54px, 9vw, 180px);
+}
+
+.hero__customers {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-cta);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+}
+
+.hero__avatars {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+}
+
+.hero__avatars img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-page);
+    margin-left: -7px;
+}
+
+.hero__avatars img:first-child { margin-left: 0; }
+
+.hero__description {
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-cta);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.22;
+    text-align: center;
+}
+
+.hero__email {
+    justify-self: end;
+    color: #101010;
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.placeholder-section {
+    min-height: 35vh;
+    padding-block: var(--space-10);
+}
+
+@media (max-width: 1100px) {
+    .hero__inner {
+        min-height: 0;
+        padding-top: 70px;
+    }
+
+    .hero-art {
+        width: min(118vw, 1250px);
+        margin-top: 0;
+    }
+
+    .hero__meta {
+        width: min(100%, 760px);
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 14px;
+        margin-top: 18px;
+        text-align: center;
+    }
+
+    .hero__email { justify-self: center; }
+}
+
+@media (max-width: 700px) {
+    .hero__inner {
+        min-height: 0;
+        padding-top: 58px;
+    }
+
+    .hero__title {
+        width: 100%;
+        font-size: clamp(42px, 11vw, 64px);
+    }
+
+    .editor-toolbar {
+        margin-top: 10px;
+    }
+
+    .hero-art {
+        width: 128vw;
+        margin-top: 8px;
+    }
+
+    .hero__meta {
+        margin-top: 16px;
+    }
+
+    .hero__description,
+    .hero__email { font-size: 16px; }
+    .hero__customers { font-size: 14px; }
+}
+
+@media (hover: none),
+(prefers-reduced-motion: reduce) {
+    .hero-art__lens-image,
+    .hero-art__ripple-image { display: none; }
+}

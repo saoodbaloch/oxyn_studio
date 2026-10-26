@@ -1,0 +1,1191 @@
+/* OXYN mobile experience v2 — desktop untouched */
+@media (max-width: 760px) {
+  :root{--m-pad:16px}
+
+  /* Header: compact bar + full mobile navigation panel */
+  .site-header,.site-header.is-scrolled{height:64px!important;min-height:64px!important;padding:0!important;background:rgba(247,247,245,.86)!important;backdrop-filter:blur(18px) saturate(145%)!important;-webkit-backdrop-filter:blur(18px) saturate(145%)!important}
+  .site-header__inner,.site-header.is-scrolled .site-header__inner{width:100%!important;height:64px!important;padding:0 14px!important;grid-template-columns:auto 1fr auto auto!important;column-gap:10px!important}
+  .site-logo img{width:84px!important;height:auto!important}
+  .header-cta{display:inline-flex!important;grid-column:3!important;justify-self:end!important;width:auto!important;min-width:104px!important;height:38px!important;padding:0 15px!important;font-size:14px!important;border-radius:999px!important}
+  .nav-toggle{display:grid!important;grid-column:4!important;width:38px!important;height:38px!important;padding:0!important;place-content:center!important;border:1px solid rgba(0,0,0,.16)!important;border-radius:12px!important;background:rgba(255,255,255,.72)!important;z-index:1003!important}
+  .nav-toggle__line{width:17px!important;margin:2.5px 0!important;transition:transform .22s ease,opacity .22s ease!important}
+  .nav-toggle[aria-expanded="true"] .nav-toggle__line:first-child{transform:translateY(3.25px) rotate(45deg)!important}
+  .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2){transform:translateY(-3.25px) rotate(-45deg)!important}
+  .primary-nav,.site-header.is-scrolled .primary-nav{position:fixed!important;z-index:1001!important;top:64px!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:calc(100dvh - 64px)!important;margin:0!important;padding:8px 18px 28px!important;border:0!important;border-radius:0!important;background:rgba(247,247,245,.94)!important;backdrop-filter:blur(24px) saturate(140%)!important;-webkit-backdrop-filter:blur(24px) saturate(140%)!important;box-shadow:none!important;overflow:auto!important}
+  .primary-nav__list{gap:0!important;align-items:stretch!important}
+  .primary-nav__list li{border-bottom:1px solid rgba(0,0,0,.08)!important}
+  .primary-nav__link{min-height:54px!important;padding:0 2px!important;font-size:18px!important;font-family:var(--font-ui)!important}
+  body.mobile-nav-open{overflow:hidden!important}
+
+  /* Showreel: moving text remains behind the video like reference */
+  .showreel{min-height:520px!important;padding:86px 0 88px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+  .showreel__marquee{display:block!important;top:42%!important;opacity:1!important}
+  .showreel__marquee-track{font-size:clamp(76px,27vw,112px)!important;color:#dededc!important;letter-spacing:-.05em!important;animation-duration:18s!important}
+  .showreel__media{position:relative!important;z-index:3!important;width:calc(100% - 28px)!important;aspect-ratio:16/9!important;margin:90px auto 0!important;border-radius:22px!important;overflow:hidden!important;box-shadow:0 18px 34px rgba(0,0,0,.08)!important}
+
+  /* Services: mobile scroll story, not static stacked cards */
+  .services-story{position:relative!important;height:500svh!important;min-height:500svh!important;padding:0!important;overflow:visible!important;background:var(--color-page)!important}
+  .services-story__viewport{position:sticky!important;top:64px!important;height:calc(100svh - 64px)!important;min-height:0!important;overflow:hidden!important;padding:0!important}
+  .services-story__content{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;transform:none!important}
+  .service-panel{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;padding:118px 28px 0!important;opacity:0!important;visibility:hidden!important;transform:translateY(26px)!important;filter:blur(7px)!important;transition:opacity .42s ease,transform .5s cubic-bezier(.2,.8,.2,1),filter .42s ease!important;pointer-events:none!important}
+  .service-panel.is-mobile-active{opacity:1!important;visibility:visible!important;transform:translateY(0)!important;filter:none!important;pointer-events:auto!important}
+  .service-panel__eyebrow{display:block!important;margin:0 0 28px!important;font-family:"Geist Mono",monospace!important;font-size:12px!important;color:#bbb!important}
+  .service-panel__title{max-width:320px!important;margin:0!important;font-size:clamp(37px,12vw,54px)!important;line-height:.98!important;font-weight:400!important;letter-spacing:-.04em!important}
+  .service-panel__description{max-width:310px!important;margin:28px auto 0!important;font-size:14px!important;line-height:1.45!important;color:#686868!important}
+  .service-panel__tags{justify-content:center!important;gap:7px!important;margin-top:22px!important}
+  .service-panel__tag{font-size:10px!important;padding:7px 11px!important;white-space:nowrap!important}
+  .service-panel__mobile-visual{display:block!important;position:absolute!important;left:50%!important;bottom:-72px!important;width:min(88vw,390px)!important;height:245px!important;margin:0!important;transform:translateX(-50%)!important;overflow:hidden!important;pointer-events:none!important}
+  .service-panel__mobile-visual img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
+  .services-story__visuals{display:none!important}
+  .services-story__progress{display:none!important}
+  .services-wheel{display:block!important;position:absolute!important;z-index:20!important;left:50%!important;top:-270px!important;width:620px!important;height:350px!important;transform:translateX(-50%)!important;pointer-events:none!important}
+  .services-wheel__ring{position:absolute!important;left:0!important;top:0!important;width:620px!important;height:620px!important;border:1px solid #ddd!important;border-radius:50%!important}
+  .services-wheel__numbers{display:none!important}
+  .services-wheel__active-dot{position:absolute!important;left:50%!important;top:344px!important;width:9px!important;height:9px!important;border-radius:50%!important;background:#ff2020!important;box-shadow:0 0 0 5px rgba(255,32,32,.12)!important;transform:translateX(-50%)!important}
+
+  /* Pricing: preserve existing Creator/Agency toggle, mobile card becomes readable */
+  .pricing{padding:72px 10px 84px!important}
+  .pricing__inner{width:100%!important}
+  .pricing__title{font-size:clamp(29px,9vw,39px)!important;line-height:1.05!important;padding:0 6px!important}
+  .pricing__switch-row{gap:7px!important;font-size:12px!important;flex-wrap:nowrap!important}
+  .pricing-card{display:flex!important;flex-direction:column!important;min-height:0!important;margin-top:38px!important;border-radius:24px!important;overflow:hidden!important;background:rgba(255,255,255,.5)!important}
+  .pricing-card__main{padding:28px 20px 24px!important;min-height:300px!important}
+  .pricing-card__name{font-size:20px!important}.pricing-card__description{margin-top:22px!important;font-size:13px!important;line-height:1.35!important}.pricing-card__desktop-break{display:none!important}
+  .pricing-card__price-row{margin-top:42px!important}.pricing-card__price{font-size:48px!important}.pricing-card__period{font-size:12px!important}
+  .pricing-card__cta{min-height:48px!important;margin-top:20px!important;font-size:14px!important}
+  .pricing-card__features-wrap{display:block!important;padding:20px 20px 30px!important;border-top:1px dashed rgba(0,0,0,.09)!important}
+  .pricing-card__popular{height:34px!important;min-height:34px!important;padding:0 13px!important;font-size:11px!important;margin-bottom:20px!important}
+  .pricing-card__features{gap:15px!important;font-size:12px!important;line-height:1.35!important}
+
+  /* Testimonials: horizontal swipe like Featured Work on mobile */
+  .testimonials{padding:72px 0 82px!important;overflow:hidden!important}
+  .testimonials__inner{align-items:center!important}
+  .testimonials__eyebrow,.testimonials__title,.testimonials__stats{margin-left:16px!important;margin-right:16px!important}
+  .testimonials__title{font-size:clamp(29px,9vw,39px)!important;line-height:1.03!important}
+  .testimonials__cards{width:100%!important;min-height:0!important;margin-top:36px!important;padding:0 16px 14px!important;display:flex!important;justify-content:flex-start!important;align-items:stretch!important;gap:14px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-padding-left:16px!important;-webkit-overflow-scrolling:touch!important;transform:none!important;scrollbar-width:none!important}
+  .testimonials__cards::-webkit-scrollbar{display:none!important}
+  .testimonial-card,.testimonial-card--1,.testimonial-card--2,.testimonial-card--3{display:block!important;flex:0 0 min(76vw,270px)!important;width:min(76vw,270px)!important;aspect-ratio:9/16!important;margin:0!important;transform:none!important;scroll-snap-align:center!important;z-index:1!important}
+  .testimonial-card__media{border-width:4px!important;border-radius:22px!important}
+  .testimonials__stats{width:calc(100% - 32px)!important;margin-top:26px!important}
+
+  /* Never let mobile sections leak horizontally */
+  html,body{max-width:100%;overflow-x:hidden}
+}
+
+/* =========================================================
+   OXYN MOBILE V3 — requested final interaction pass
+   Desktop rules are intentionally untouched.
+   ========================================================= */
+@media (max-width: 760px) {
+  /* Header: CTA stays beside hamburger; menu opens like a top shutter. */
+  .site-header,
+  .site-header.is-scrolled {
+    overflow: visible !important;
+  }
+
+  .primary-nav,
+  .site-header.is-scrolled .primary-nav {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: calc(100dvh - 64px) !important;
+    padding: 10px 18px 22px !important;
+    overflow: auto !important;
+    display: block !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate3d(0,-18px,0) scaleY(.88) !important;
+    transform-origin: top center !important;
+    clip-path: inset(0 0 100% 0) !important;
+    background: rgba(247,247,245,.90) !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,.72) !important;
+    border-radius: 0 0 22px 22px !important;
+    box-shadow: 0 20px 42px rgba(0,0,0,.08) !important;
+    backdrop-filter: blur(24px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+    transition:
+      clip-path .42s cubic-bezier(.2,.75,.2,1),
+      transform .42s cubic-bezier(.2,.75,.2,1),
+      opacity .24s ease,
+      visibility .42s step-end !important;
+  }
+
+  .primary-nav.is-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translate3d(0,0,0) scaleY(1) !important;
+    clip-path: inset(0 0 0 0) !important;
+    transition:
+      clip-path .42s cubic-bezier(.2,.75,.2,1),
+      transform .42s cubic-bezier(.2,.75,.2,1),
+      opacity .22s ease,
+      visibility 0s step-start !important;
+  }
+
+  .primary-nav__list { display:flex !important; flex-direction:column !important; }
+  .primary-nav__list li { opacity:0; transform:translateY(-8px); transition:opacity .22s ease,transform .3s ease !important; }
+  .primary-nav.is-open .primary-nav__list li { opacity:1; transform:none; }
+  .primary-nav.is-open .primary-nav__list li:nth-child(1){transition-delay:.08s!important}
+  .primary-nav.is-open .primary-nav__list li:nth-child(2){transition-delay:.11s!important}
+  .primary-nav.is-open .primary-nav__list li:nth-child(3){transition-delay:.14s!important}
+  .primary-nav.is-open .primary-nav__list li:nth-child(4){transition-delay:.17s!important}
+  .primary-nav.is-open .primary-nav__list li:nth-child(5){transition-delay:.20s!important}
+
+  /* Showreel: moving word lives in the empty upper area, never underneath media. */
+  .showreel {
+    min-height: 560px !important;
+    padding: 72px 0 86px !important;
+    display: block !important;
+  }
+  .showreel__marquee {
+    top: 108px !important;
+    height: 120px !important;
+    transform: none !important;
+    display:flex !important;
+    align-items:center !important;
+    z-index:1 !important;
+  }
+  .showreel__marquee-track {
+    font-size: clamp(72px,26vw,108px) !important;
+    color:#dededc !important;
+    line-height:1 !important;
+  }
+  .showreel__media {
+    z-index:3 !important;
+    margin: 205px auto 0 !important;
+    width: calc(100% - 28px) !important;
+  }
+
+  /* Services: horizontal upper arc + moving 01–05 + fixed red marker. */
+  .services-story { height: 500svh !important; }
+  .services-story__viewport { top:64px !important; height:calc(100svh - 64px) !important; }
+
+  .services-wheel {
+    display:block !important;
+    position:absolute !important;
+    z-index:30 !important;
+    left:50% !important;
+    top:-405px !important;
+    width:760px !important;
+    height:470px !important;
+    transform:translateX(-50%) !important;
+    overflow:visible !important;
+  }
+  .services-wheel__ring {
+    left:0 !important;
+    top:0 !important;
+    width:760px !important;
+    height:760px !important;
+    border:1px solid rgba(0,0,0,.12) !important;
+    border-radius:50% !important;
+  }
+  .services-wheel__numbers {
+    display:block !important;
+    position:absolute !important;
+    inset:0 !important;
+  }
+  .services-wheel__number {
+    display:block !important;
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    margin:0 !important;
+    color:#b9b9b9 !important;
+    font-family:var(--font-display) !important;
+    font-size:25px !important;
+    line-height:1 !important;
+    opacity:.42;
+    white-space:nowrap;
+    will-change:transform,opacity;
+  }
+  .services-wheel__number.is-current { color:#171717 !important; opacity:1 !important; font-size:30px !important; }
+  .services-wheel__active-dot {
+    left:50% !important;
+    top:50% !important;
+    width:8px !important;
+    height:8px !important;
+    background:#ff2020 !important;
+    box-shadow:0 0 0 5px rgba(255,32,32,.12) !important;
+    will-change:transform;
+  }
+
+  .service-panel {
+    padding: 92px 24px 0 !important;
+    justify-content:flex-start !important;
+  }
+  .service-panel__eyebrow { display:none !important; }
+  .service-panel__title { margin-top:0 !important; }
+  .service-panel__description { margin-top:22px !important; }
+  .service-panel__tags { margin-top:18px !important; max-width:340px !important; }
+
+  /* Artwork remains inside the phone viewport and anchored at its bottom. */
+  .service-panel__mobile-visual {
+    left:50% !important;
+    bottom:-10px !important;
+    width:min(96vw,430px) !important;
+    height:255px !important;
+    transform:translateX(-50%) !important;
+  }
+  .service-panel__mobile-visual img {
+    object-fit:contain !important;
+    object-position:center bottom !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-cta { min-width:96px !important; padding-inline:12px !important; font-size:13px !important; }
+  .site-header__inner,.site-header.is-scrolled .site-header__inner { padding-inline:10px !important; column-gap:7px !important; }
+  .site-logo img { width:80px !important; }
+  .service-panel { padding-inline:18px !important; }
+  .service-panel__description { max-width:285px !important; font-size:13px !important; }
+  .service-panel__tag { font-size:9px !important; padding:6px 9px !important; }
+}
+
+/* =========================================================
+   MOBILE V4 HOTFIX — header single-line + services reference
+   Only <=760px. Desktop/web remains unchanged.
+   ========================================================= */
+@media (max-width:760px){
+  /* Always keep Logo | Book a call | Hamburger on ONE line. */
+  .site-header__inner,
+  .site-header.is-scrolled .site-header__inner{
+    display:grid!important;
+    grid-template-columns:minmax(58px,84px) minmax(0,1fr) auto auto!important;
+    grid-template-rows:64px!important;
+    align-items:center!important;
+    width:100%!important;
+    height:64px!important;
+    padding-inline:clamp(8px,3.6vw,14px)!important;
+    column-gap:clamp(5px,2.2vw,10px)!important;
+  }
+  .site-logo{grid-column:1!important;grid-row:1!important;min-width:0!important;align-self:center!important}
+  .site-logo img{display:block!important;width:clamp(64px,22vw,84px)!important;height:auto!important;max-width:100%!important}
+  .header-cta{
+    grid-column:3!important;grid-row:1!important;align-self:center!important;justify-self:end!important;
+    min-width:0!important;width:auto!important;height:clamp(32px,10vw,38px)!important;
+    padding-inline:clamp(10px,3.4vw,15px)!important;font-size:clamp(11px,3.5vw,14px)!important;
+    line-height:1!important;white-space:nowrap!important;margin:0!important;
+  }
+  .nav-toggle{
+    grid-column:4!important;grid-row:1!important;align-self:center!important;justify-self:end!important;
+    width:clamp(32px,10vw,38px)!important;height:clamp(32px,10vw,38px)!important;
+    margin:0!important;border-radius:10px!important;
+  }
+
+  /* Shutter begins directly under the same 64px header row. */
+  .primary-nav,.site-header.is-scrolled .primary-nav{top:64px!important}
+
+  /* SERVICES — same desktop scroll story, re-composed horizontally for phone. */
+  .services-story{height:500svh!important;min-height:500svh!important}
+  .services-story__viewport{position:sticky!important;top:64px!important;height:calc(100svh - 64px)!important;overflow:hidden!important}
+
+  /* Shallow horizontal arc across the TOP. */
+  .services-wheel{
+    left:50%!important;top:-438px!important;width:820px!important;height:545px!important;
+    transform:translateX(-50%)!important;overflow:visible!important;
+  }
+  .services-wheel__ring{left:0!important;top:0!important;width:820px!important;height:820px!important;border-color:rgba(0,0,0,.11)!important}
+  .services-wheel__numbers{display:block!important;position:absolute!important;inset:0!important}
+  .services-wheel__number{font-size:25px!important;color:#b7b7b7!important}
+  .services-wheel__number.is-current{font-size:30px!important;color:#171717!important;opacity:1!important}
+  .services-wheel__active-dot{width:8px!important;height:8px!important;background:#ff2020!important}
+
+  /* Copy changes in-place as 01→05 changes; it never stacks vertically. */
+  .services-story__content{position:absolute!important;inset:0!important;height:100%!important}
+  .service-panel{
+    position:absolute!important;inset:0!important;
+    padding:132px 24px 0!important;
+    display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;
+  }
+  .service-panel__title{max-width:340px!important;font-size:clamp(34px,10.8vw,48px)!important;line-height:1!important}
+  .service-panel__description{max-width:320px!important;margin-top:24px!important;font-size:13px!important;line-height:1.42!important}
+  .service-panel__tags{max-width:340px!important;justify-content:center!important;margin-top:18px!important;gap:7px!important}
+
+  /* Artwork is deliberately BELOW the copy and clipped by the phone viewport,
+     like the supplied reference. It stays there while each service changes. */
+  .service-panel__mobile-visual{
+    display:block!important;position:absolute!important;z-index:1!important;
+    left:50%!important;bottom:-112px!important;
+    width:min(108vw,460px)!important;height:300px!important;
+    margin:0!important;transform:translateX(-50%)!important;overflow:visible!important;
+  }
+  .service-panel__mobile-visual img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
+}
+
+@media (max-width:280px){
+  .site-header__inner,.site-header.is-scrolled .site-header__inner{grid-template-columns:58px minmax(0,1fr) auto auto!important;padding-inline:6px!important;column-gap:4px!important}
+  .site-logo img{width:58px!important}
+  .header-cta{height:30px!important;padding-inline:8px!important;font-size:10px!important}
+  .nav-toggle{width:30px!important;height:30px!important}
+  .service-panel{padding-inline:16px!important}
+}
+
+/* =========================================================
+   MOBILE V5 — TRUE STICKY SERVICES STORY
+   01→05 are driven by the SAME scroll story as desktop.
+   The phone viewport stays pinned until service 05 completes.
+   ========================================================= */
+@media (max-width:760px){
+  .services-story{
+    position:relative!important;
+    height:440svh!important;
+    min-height:440svh!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:visible!important;
+  }
+  .services-story__viewport{
+    position:sticky!important;
+    position:-webkit-sticky!important;
+    top:64px!important;
+    height:calc(100svh - 64px)!important;
+    min-height:calc(100svh - 64px)!important;
+    max-height:calc(100svh - 64px)!important;
+    overflow:hidden!important;
+    background:var(--color-page)!important;
+  }
+
+  /* Curve stays fixed at top while its numbers travel horizontally. */
+  .services-wheel{
+    display:block!important;
+    position:absolute!important;
+    z-index:40!important;
+    left:50%!important;
+    top:-350px!important;
+    width:700px!important;
+    height:700px!important;
+    transform:translateX(-50%)!important;
+    pointer-events:none!important;
+  }
+  .services-wheel__ring{
+    position:absolute!important;
+    left:0!important;top:0!important;
+    width:700px!important;height:700px!important;
+    border:1px solid rgba(0,0,0,.10)!important;
+    border-radius:50%!important;
+  }
+  .services-wheel__number{
+    left:50%!important;top:50%!important;
+    font-size:25px!important;
+    transition:font-size .18s ease,color .18s ease,opacity .18s ease!important;
+  }
+  .services-wheel__number.is-current{font-size:29px!important}
+
+  /* Content never travels down the 500vh page. It swaps INSIDE sticky screen. */
+  .services-story__content{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;height:100%!important;
+    overflow:hidden!important;
+  }
+  .service-panel{
+    position:absolute!important;
+    inset:0!important;
+    padding:126px 20px 0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    text-align:center!important;
+    transform:none!important;
+    filter:none!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  .service-panel.is-active{
+    opacity:1!important;
+    visibility:visible!important;
+  }
+  .service-panel__title{
+    margin:0!important;
+    max-width:330px!important;
+    font-size:clamp(34px,10.5vw,46px)!important;
+    line-height:1.02!important;
+  }
+  .service-panel__description{
+    margin:24px auto 0!important;
+    max-width:310px!important;
+    font-size:13px!important;
+    line-height:1.42!important;
+  }
+  .service-panel__tags{
+    margin:18px auto 0!important;
+    max-width:340px!important;
+    justify-content:center!important;
+  }
+
+  /* Visual belongs to the sticky screen, not document flow. */
+  .service-panel__mobile-visual{
+    display:block!important;
+    position:absolute!important;
+    left:50%!important;
+    bottom:-105px!important;
+    width:min(112vw,450px)!important;
+    height:300px!important;
+    margin:0!important;
+    transform:translateX(-50%)!important;
+    overflow:visible!important;
+  }
+  .service-panel__mobile-visual img{
+    display:block!important;
+    width:100%!important;height:100%!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+  }
+}
+
+/* =========================================================
+   MOBILE V6 FINAL — desktop service story mapped to phone
+   Requested behaviour:
+   - sticky 01→05 story
+   - shallow horizontal arc at top
+   - red marker on arc, active number below it
+   - copy has its own clean reading zone
+   - artwork is anchored to / cropped by bottom of phone viewport
+   Desktop/tablet rules above 760px are untouched.
+   ========================================================= */
+@media (max-width:760px){
+  .services-story{
+    position:relative!important;
+    height:440svh!important;
+    min-height:440svh!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:visible!important;
+    background:var(--color-page)!important;
+  }
+
+  .services-story__viewport{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:64px!important;
+    height:calc(100svh - 64px)!important;
+    min-height:calc(100svh - 64px)!important;
+    max-height:calc(100svh - 64px)!important;
+    overflow:hidden!important;
+    background:var(--color-page)!important;
+    isolation:isolate!important;
+  }
+
+  /* Large circle sits mostly ABOVE the viewport, leaving only a shallow arc. */
+  .services-wheel{
+    display:block!important;
+    position:absolute!important;
+    z-index:40!important;
+    left:50%!important;
+    top:-590px!important;
+    width:680px!important;
+    height:680px!important;
+    transform:translateX(-50%)!important;
+    overflow:visible!important;
+    pointer-events:none!important;
+  }
+  .services-wheel__ring{
+    position:absolute!important;
+    inset:0!important;
+    width:680px!important;
+    height:680px!important;
+    border:1px solid rgba(0,0,0,.105)!important;
+    border-radius:50%!important;
+  }
+  .services-wheel__numbers{
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+  }
+  .services-wheel__number{
+    display:block!important;
+    position:absolute!important;
+    left:50%!important;
+    top:calc(50% + 32px)!important;
+    margin:0!important;
+    color:#b7b7b7!important;
+    font-family:var(--font-display)!important;
+    font-size:25px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    will-change:transform,opacity!important;
+    transition:color .18s ease,font-size .18s ease,opacity .18s ease!important;
+  }
+  .services-wheel__number.is-current{
+    color:#171717!important;
+    opacity:1!important;
+    font-size:29px!important;
+  }
+  .services-wheel__active-dot{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    width:8px!important;
+    height:8px!important;
+    border-radius:50%!important;
+    background:#ff2020!important;
+    box-shadow:0 0 0 5px rgba(255,32,32,.12)!important;
+    will-change:transform!important;
+  }
+
+  /* All five panels occupy ONE sticky phone screen; JS swaps active service. */
+  .services-story__content{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+    z-index:10!important;
+  }
+  .service-panel{
+    position:absolute!important;
+    inset:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    text-align:center!important;
+    padding:154px 20px 0!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    transform:none!important;
+    filter:none!important;
+    pointer-events:none!important;
+  }
+  .service-panel.is-active{
+    opacity:1!important;
+    visibility:visible!important;
+  }
+  .service-panel__eyebrow{display:none!important}
+  .service-panel__title{
+    margin:0!important;
+    max-width:330px!important;
+    font-size:clamp(32px,10.2vw,44px)!important;
+    line-height:1.02!important;
+    font-weight:400!important;
+    letter-spacing:-.035em!important;
+  }
+  .service-panel__description{
+    margin:22px auto 0!important;
+    max-width:310px!important;
+    font-size:13px!important;
+    line-height:1.42!important;
+    color:#686868!important;
+  }
+  .service-panel__tags{
+    display:flex!important;
+    justify-content:center!important;
+    flex-wrap:wrap!important;
+    gap:7px!important;
+    margin:17px auto 0!important;
+    max-width:340px!important;
+  }
+  .service-panel__tag{
+    font-size:9px!important;
+    line-height:1!important;
+    padding:7px 10px!important;
+    white-space:nowrap!important;
+  }
+
+  /* The artwork never joins normal page flow: it lives at the phone bottom. */
+  .service-panel__mobile-visual{
+    display:block!important;
+    position:absolute!important;
+    z-index:0!important;
+    left:50%!important;
+    bottom:-135px!important;
+    width:min(108vw,430px)!important;
+    height:330px!important;
+    margin:0!important;
+    transform:translateX(-50%)!important;
+    overflow:visible!important;
+    pointer-events:none!important;
+  }
+  .service-panel__mobile-visual img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+  }
+
+  .services-story__visuals,
+  .services-story__progress{display:none!important}
+}
+
+@media (max-width:390px){
+  .service-panel{padding:150px 16px 0!important}
+  .service-panel__title{font-size:clamp(31px,10vw,40px)!important;max-width:305px!important}
+  .service-panel__description{font-size:12px!important;max-width:286px!important;margin-top:18px!important}
+  .service-panel__tags{margin-top:14px!important;max-width:300px!important}
+  .service-panel__mobile-visual{bottom:-86px!important;width:min(112vw,420px)!important;height:270px!important}
+}
+
+
+/* V7 mobile services reliability fixes — mobile only. */
+@media (max-width:760px){
+  .service-panel__title,
+  .service-panel__description,
+  .service-panel__tags{position:relative!important;z-index:2!important}
+  .service-panel__mobile-visual{z-index:1!important}
+  .services-wheel{z-index:40!important}
+  .services-story__content{z-index:20!important}
+}
+
+
+/* =========================================================
+   MOBILE V8 — reliable pinned services story
+   Authoritative mobile-only override. Desktop remains unchanged.
+   ========================================================= */
+@media (max-width:760px){
+  .services-story{
+    position:relative!important;
+    height:460svh!important;
+    min-height:460svh!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .services-story__viewport{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:64px!important;
+    width:100%!important;
+    height:calc(100svh - 64px)!important;
+    min-height:calc(100svh - 64px)!important;
+    max-height:calc(100svh - 64px)!important;
+    overflow:hidden!important;
+    background:var(--color-page)!important;
+  }
+  .services-wheel{
+    display:block!important;
+    position:absolute!important;
+    z-index:50!important;
+    top:0!important;
+    left:0!important;
+    width:100%!important;
+    height:138px!important;
+    transform:none!important;
+    overflow:visible!important;
+    pointer-events:none!important;
+  }
+  .services-wheel__ring{
+    position:absolute!important;
+    left:50%!important;
+    top:-545px!important;
+    width:720px!important;
+    height:620px!important;
+    transform:translateX(-50%)!important;
+    border:1px solid rgba(0,0,0,.11)!important;
+    border-radius:50%!important;
+  }
+  .services-wheel__numbers{display:block!important;position:absolute!important;inset:0!important}
+  .services-wheel__number{
+    display:block!important;
+    position:absolute!important;
+    margin:0!important;
+    color:#b7b7b7!important;
+    font-family:var(--font-display)!important;
+    font-size:24px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    will-change:transform,opacity!important;
+  }
+  .services-wheel__number.is-current{color:#171717!important;font-size:29px!important;opacity:1!important}
+  .services-wheel__active-dot{
+    position:absolute!important;
+    z-index:3!important;
+    width:8px!important;
+    height:8px!important;
+    border-radius:50%!important;
+    background:#ff2020!important;
+    box-shadow:0 0 0 5px rgba(255,32,32,.13)!important;
+  }
+  .services-story__content{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important;z-index:20!important}
+  .service-panel{
+    position:absolute!important;inset:0!important;
+    display:flex!important;flex-direction:column!important;align-items:center!important;
+    padding:142px 18px 0!important;text-align:center!important;
+    margin:0!important;border:0!important;
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    transform:none!important;filter:none!important;
+  }
+  .service-panel.is-active{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+  .service-panel__eyebrow{display:none!important}
+  .service-panel__title{position:relative!important;z-index:2!important;margin:0!important;max-width:330px!important;font-size:clamp(31px,10vw,43px)!important;line-height:1.02!important}
+  .service-panel__description{position:relative!important;z-index:2!important;margin:20px auto 0!important;max-width:305px!important;font-size:12.5px!important;line-height:1.4!important}
+  .service-panel__tags{position:relative!important;z-index:2!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:7px!important;margin:15px auto 0!important;max-width:330px!important}
+  .service-panel__mobile-visual{
+    display:block!important;position:absolute!important;z-index:1!important;
+    left:50%!important;bottom:-112px!important;width:min(108vw,430px)!important;height:315px!important;
+    margin:0!important;transform:translateX(-50%)!important;overflow:visible!important;pointer-events:none!important;
+  }
+  .service-panel__mobile-visual img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
+  .services-story__visuals,.services-story__progress{display:none!important}
+}
+@media (max-width:390px){
+  .service-panel{padding-top:138px!important}
+  .service-panel__mobile-visual{bottom:-92px!important;height:280px!important}
+}
+
+
+/* =========================================================
+   FINAL23B — REFERENCE MOBILE SERVICES STORY
+   Mobile only. Desktop services and all other sections untouched.
+   ========================================================= */
+@media (max-width:760px){
+  /* overflow-x:hidden on body can make sticky unreliable in iOS Safari. */
+  html,body{overflow-x:clip!important;overflow-y:visible!important}
+
+  .services-story{
+    position:relative!important;
+    height:500svh!important;
+    min-height:500svh!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    background:var(--color-page)!important;
+    contain:none!important;
+  }
+  .services-story__viewport{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:64px!important;
+    width:100%!important;
+    height:calc(100svh - 64px)!important;
+    min-height:calc(100svh - 64px)!important;
+    max-height:calc(100svh - 64px)!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:var(--color-page)!important;
+    transform:none!important;
+    isolation:isolate!important;
+  }
+
+  /* Horizontal curved number rail */
+  .services-wheel{
+    display:block!important;
+    position:absolute!important;
+    z-index:50!important;
+    inset:0 0 auto 0!important;
+    width:100%!important;
+    height:122px!important;
+    transform:none!important;
+    pointer-events:none!important;
+    overflow:visible!important;
+  }
+  .services-wheel__ring{
+    position:absolute!important;
+    left:50%!important;
+    top:-505px!important;
+    width:690px!important;
+    height:570px!important;
+    transform:translateX(-50%)!important;
+    border:1px solid rgba(0,0,0,.10)!important;
+    border-radius:50%!important;
+    background:transparent!important;
+  }
+  .services-wheel__numbers{position:absolute!important;inset:0!important;display:block!important}
+  .services-wheel__number{
+    position:absolute!important;
+    display:block!important;
+    margin:0!important;
+    color:#b8b8b8!important;
+    font-family:var(--font-display)!important;
+    font-size:23px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    will-change:transform,opacity!important;
+    transition:color .18s ease,font-size .18s ease!important;
+  }
+  .services-wheel__number.is-current{color:#151515!important;font-size:28px!important;opacity:1!important}
+  .services-wheel__active-dot{
+    display:block!important;
+    position:absolute!important;
+    z-index:5!important;
+    width:8px!important;
+    height:8px!important;
+    border-radius:999px!important;
+    background:#ff2020!important;
+    box-shadow:0 0 0 5px rgba(255,32,32,.13)!important;
+    will-change:transform!important;
+  }
+
+  /* One pinned stage; only service state changes while scrolling. */
+  .services-story__content{
+    position:absolute!important;
+    inset:0!important;
+    z-index:20!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+  .service-panel{
+    position:absolute!important;
+    inset:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:126px 20px 0!important;
+    border:0!important;
+    text-align:center!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transition:opacity .24s ease,transform .28s ease,filter .24s ease!important;
+  }
+  .service-panel.is-active{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+  .service-panel__eyebrow{display:none!important}
+  .service-panel__title{
+    position:relative!important;z-index:3!important;
+    margin:0!important;max-width:330px!important;
+    font-size:clamp(31px,9.7vw,42px)!important;
+    line-height:1.02!important;font-weight:400!important;letter-spacing:-.035em!important;
+  }
+  .service-panel__description{
+    position:relative!important;z-index:3!important;
+    margin:18px auto 0!important;max-width:305px!important;
+    font-size:12px!important;line-height:1.4!important;color:#686868!important;
+  }
+  .service-panel__tags{
+    position:relative!important;z-index:3!important;
+    display:flex!important;justify-content:center!important;flex-wrap:wrap!important;
+    gap:7px!important;margin:14px auto 0!important;max-width:330px!important;
+  }
+  .service-panel__tag{font-size:8.5px!important;line-height:1!important;padding:7px 10px!important;white-space:nowrap!important}
+
+  /* Artwork remains attached to the bottom edge throughout the pinned story. */
+  .service-panel__mobile-visual{
+    display:block!important;
+    position:absolute!important;
+    z-index:1!important;
+    left:50%!important;
+    bottom:18px!important;
+    width:min(104vw,420px)!important;
+    height:255px!important;
+    margin:0!important;
+    transform:translateX(-50%)!important;
+    overflow:visible!important;
+    pointer-events:none!important;
+  }
+  .service-panel__mobile-visual img{
+    display:block!important;width:100%!important;height:100%!important;
+    object-fit:contain!important;object-position:center bottom!important;
+  }
+  .services-story__visuals,.services-story__progress{display:none!important}
+}
+@media (max-width:390px){
+  .service-panel{padding:122px 16px 0!important}
+  .service-panel__title{font-size:clamp(30px,9.5vw,39px)!important;max-width:300px!important}
+  .service-panel__description{margin-top:15px!important;max-width:285px!important;font-size:11.5px!important}
+  .service-panel__tags{margin-top:12px!important;max-width:300px!important}
+  .service-panel__mobile-visual{bottom:14px!important;height:235px!important;width:min(106vw,400px)!important}
+}
+
+/* =========================================================
+   FINAL26 — MOBILE SERVICES CLEARANCE POLISH
+   Keep Final24/25 sticky animation intact. Only reserve a clean
+   lane below the curved number rail and pull artwork upward.
+   ========================================================= */
+@media (max-width:760px){
+  .service-panel{
+    padding-top:158px!important;
+  }
+  .service-panel__mobile-visual{
+    bottom:48px!important;
+  }
+}
+@media (max-width:390px){
+  .service-panel{
+    padding-top:152px!important;
+  }
+  .service-panel__mobile-visual{
+    bottom:42px!important;
+  }
+}
+
+
+/* =========================================================
+   FINAL28 — MOBILE SERVICES DESKTOP-FEEL GEOMETRY
+   Numbers now belong to the curve, the red playhead jumps on
+   the same stroke, and artwork is larger / half-cropped at the
+   viewport bottom. Mobile only; desktop remains untouched.
+   ========================================================= */
+@media (max-width:760px){
+  .services-wheel{height:132px!important}
+  .services-wheel__number{z-index:6!important}
+  .services-wheel__active-dot{
+    z-index:8!important;
+    transition:transform 180ms cubic-bezier(.22,.61,.36,1)!important;
+  }
+
+  /* Keep copy safely below the curved navigation without wasting the stage. */
+  .service-panel{padding-top:142px!important}
+  .service-panel__description{margin-top:14px!important}
+  .service-panel__tags{margin-top:11px!important}
+
+  /* Large artwork, anchored through the bottom edge like the reference. */
+  .service-panel__mobile-visual{
+    bottom:-105px!important;
+    width:min(118vw,455px)!important;
+    height:335px!important;
+  }
+}
+@media (max-width:390px){
+  .service-panel{padding-top:136px!important}
+  .service-panel__description{margin-top:12px!important}
+  .service-panel__tags{margin-top:10px!important}
+  .service-panel__mobile-visual{
+    bottom:-98px!important;
+    width:min(120vw,430px)!important;
+    height:315px!important;
+  }
+}
+@media (max-height:650px) and (max-width:760px){
+  .service-panel{padding-top:128px!important}
+  .service-panel__title{font-size:clamp(28px,9vw,37px)!important}
+  .service-panel__description{margin-top:10px!important;font-size:10.8px!important}
+  .service-panel__tags{margin-top:8px!important}
+  .service-panel__mobile-visual{bottom:-112px!important;height:300px!important}
+}
+
+
+/* =========================================================
+   FINAL29 — MOBILE SERVICES NUMBER RAIL ALIGNMENT FIX
+   Earlier mobile layers left `left:50% !important` /
+   `top:calc(50% + 32px) !important` on the number rail and the red
+   marker. Those !important declarations beat the inline transforms
+   written by services-scroll.js, so 01–05 were pushed half a screen
+   to the right and well below the stroke.
+   This block hands positioning back to the script (JS is now the
+   single source of truth) and keeps the labels on the curve.
+   Mobile only — desktop services remain untouched.
+   ========================================================= */
+@media (max-width:760px){
+  .services-wheel__numbers{
+    position:absolute!important;
+    inset:0!important;
+    display:block!important;
+    overflow:visible!important;
+  }
+
+  .services-wheel__number{
+    left:0!important;
+    top:0!important;
+    right:auto!important;
+    bottom:auto!important;
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    transform-origin:50% 50%!important;
+    font-size:25px!important;
+    /* font-size must not animate: it would break the -50%/-50% centring
+       while the rail is gliding. */
+    transition:color .18s ease!important;
+  }
+  .services-wheel__number.is-current{
+    font-size:32px!important;
+    color:#151515!important;
+    opacity:1!important;
+  }
+
+  .services-wheel__active-dot{
+    left:0!important;
+    top:0!important;
+    right:auto!important;
+    bottom:auto!important;
+    margin:0!important;
+    transform-origin:50% 50%!important;
+  }
+}
+
+@media (max-width:390px){
+  .services-wheel__number{font-size:23px!important}
+  .services-wheel__number.is-current{font-size:29px!important}
+}
+
+
+/* =========================================================
+   FINAL30 — MOBILE NAV RELIABILITY + HERO ART + SERVICES SPACING
+   Mobile only (<=760px). Desktop is untouched.
+
+   1) Hamburger menu did not open once the page was scrolled.
+      Two separate causes:
+      a) `.site-header.is-scrolled .primary-nav` (0,3,0) outranks
+         `.primary-nav.is-open` (0,2,0), so past 24px of scroll the
+         CLOSED declarations kept winning. Fixed with a matching
+         `.site-header.is-scrolled .primary-nav.is-open` selector.
+      b) `body.mobile-nav-open{overflow:hidden}` turned <body> into a
+         scroll container, which killed the sticky header. The header
+         also carries `backdrop-filter`, so it is the containing block
+         for the position:fixed panel — when the header fell away, the
+         panel went with it. The lock is replaced by overscroll
+         containment, which does not affect stickiness.
+   2) Hero artwork was a thin strip on phones; it now bleeds past both
+      edges at a taller scale, closer to the reference.
+   3) Services: the dead space between the tags and the artwork is
+      removed by lifting the artwork up the stage.
+   ========================================================= */
+@media (max-width:760px){
+
+  /* ---- 1a) open state must beat the scrolled closed state ---- */
+  .site-header.is-scrolled .primary-nav.is-open,
+  .primary-nav.is-open{
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    transform:translate3d(0,0,0) scaleY(1)!important;
+    clip-path:inset(0 0 0 0)!important;
+    transition:
+      clip-path .42s cubic-bezier(.2,.75,.2,1),
+      transform .42s cubic-bezier(.2,.75,.2,1),
+      opacity .22s ease,
+      visibility 0s step-start!important;
+  }
+  .site-header.is-scrolled .primary-nav.is-open .primary-nav__list li,
+  .primary-nav.is-open .primary-nav__list li{opacity:1!important;transform:none!important}
+
+  /* The panel sits over page content, so keep it readable even where
+     backdrop-filter is unavailable. */
+  .primary-nav,
+  .site-header.is-scrolled .primary-nav{background:rgba(247,247,245,.97)!important}
+
+  /* ---- 1b) never turn <body> into a scroll container ---- */
+  body.mobile-nav-open{
+    overflow:visible!important;
+    overscroll-behavior:contain!important;
+  }
+  /* Keep the sticky bar genuinely sticky at the top of the viewport. */
+  .site-header,
+  .site-header.is-scrolled{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:0!important;
+  }
+
+  /* ---- 2) hero artwork: bleed past both edges, noticeably taller ---- */
+  .hero{overflow-x:clip!important}
+  .hero__inner{padding-top:40px!important}
+  .hero-art{
+    width:138vw!important;
+    max-width:none!important;
+    margin:14px -19vw -4px!important;
+  }
+  .hero__meta{margin-top:10px!important;row-gap:12px!important}
+
+  /* ---- 3) services: close the gap between the copy and the artwork ---- */
+  /* The service PNGs carry ~17% transparent padding, so the box has to be
+     larger than the artwork looks and is deliberately cropped at the bottom. */
+  .service-panel__mobile-visual{
+    bottom:-160px!important;
+    width:min(160vw,620px)!important;
+    height:620px!important;
+  }
+}
+
+@media (max-width:390px){
+  .hero-art{width:144vw!important;margin:12px -22vw -4px!important}
+  .service-panel__mobile-visual{
+    bottom:-150px!important;
+    width:min(162vw,575px)!important;
+    height:575px!important;
+  }
+}
+
+@media (max-height:700px) and (max-width:760px){
+  .service-panel__mobile-visual{bottom:-215px!important;width:min(150vw,430px)!important;height:430px!important}
+}
+
+
+/* =========================================================
+   FINAL32 — MOBILE SERVICES ARTWORK: CONTAIN + STOP THE JUMP
+   Mobile only (<=760px). Desktop untouched.
+
+   Two bugs, one root cause each:
+
+   1) "image only ~30% inside the screen" — earlier tiers pinned the
+      figure with huge negative `bottom` values (-150px…-215px) and
+      widths up to 160vw so the artwork mostly landed BELOW the
+      visible panel (each service panel is `inset:0` i.e. exactly one
+      screen tall) or bled past the sides. Most of the graphic was
+      therefore off-screen and only became reachable by scrolling.
+      Fixed by placing the artwork in normal flex flow (the panel is
+      already `display:flex; flex-direction:column`) with
+      `margin-top:auto`, so it always sits fully inside the same
+      screen as the title/tags, sized as a share of that screen's own
+      height (`dvh`) instead of guessed pixel offsets per device.
+
+   2) "1 picture centered, others lean right, changes look odd" — the
+      five PNGs had different, asymmetric amounts of transparent
+      padding baked in (e.g. service-03 was centred inside its own
+      canvas, service-01/02/04/05 had extra padding on the left only).
+      `object-fit:contain` centres the CANVAS, not the artwork inside
+      it, so those four appeared shifted right, and swapping between
+      them visibly hopped sideways. The PNGs have been re-cropped and
+      re-centred on symmetric square canvases (source assets fixed,
+      not just papered over with CSS), so this block only needs to
+      display them plainly.
+   ========================================================= */
+@media (max-width:760px){
+  .service-panel__mobile-visual{
+    display:block!important;
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    inset:auto!important;
+    margin:auto 0 0!important;
+    transform:none!important;
+    width:min(64vw,280px)!important;
+    aspect-ratio:1/1!important;
+    height:auto!important;
+    max-height:30dvh!important;
+    overflow:visible!important;
+    pointer-events:none!important;
+  }
+  .service-panel__mobile-visual img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+}
+
+@media (max-height:700px) and (max-width:760px){
+  .service-panel__mobile-visual{
+    width:min(56vw,240px)!important;
+    max-height:26dvh!important;
+  }
+}
+
+
+/* =========================================================
+   FINAL32b — CONTACT: no video on mobile
+   Desktop/tablet keep the video exactly as before (contact.css,
+   untouched). On phones the clip added weight without adding
+   value, so it's removed and the form simply takes the full card.
+   ========================================================= */
+@media (max-width:760px){
+  .contact-card__visual{display:none!important}
+  .contact-card{gap:0!important}
+}

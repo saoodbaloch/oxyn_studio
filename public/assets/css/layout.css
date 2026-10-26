@@ -1,0 +1,19 @@
+.container {
+    width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-max));
+    margin-inline: auto;
+}
+
+.section {
+    padding-block: clamp(var(--space-8), 8vw, var(--space-10));
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
